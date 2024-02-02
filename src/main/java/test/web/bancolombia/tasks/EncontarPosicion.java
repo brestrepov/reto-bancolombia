@@ -1,10 +1,10 @@
 package test.web.bancolombia.tasks;
 
 import net.serenitybdd.screenplay.Actor;
-import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
+import net.thucydides.core.annotations.Step;
 import test.web.bancolombia.interactions.ObtenerSuma;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
@@ -20,6 +20,7 @@ public class EncontarPosicion implements Task {
 
 
     @Override
+    @Step("{0} da click en el boton busquedo e ingresa la suma de los valores proximos")
     public <T extends Actor> void performAs(T actor) {
         String[][] matriz = actor.recall(MATRIZ);
         int posicionX = actor.recall(COORDENADA_X);
@@ -33,8 +34,6 @@ public class EncontarPosicion implements Task {
                 Enter.theValue(Integer.toString(sumaTotal)).into(TXT_SUMA_VALORES),
                 Click.on(BTN_ENVIAR)
         );
-
-        //System.out.println("valor cuadro: " + matriz[posiciony][posicionX]);
     }
 
     public static EncontarPosicion segunCoordenadas() {

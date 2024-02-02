@@ -2,6 +2,7 @@ package test.web.bancolombia.interactions;
 
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Interaction;
+import net.thucydides.core.annotations.Step;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 import static test.web.bancolombia.utils.Constantes.COORDENADA_X;
@@ -14,6 +15,7 @@ public class ObtenerSuma implements Interaction {
     private int sumaTotal=0;
 
     @Override
+    @Step("{0} crea una matriz con los valores proximos para realizar la suma de estos")
     public <T extends Actor> void performAs(T actor) {
         String[][] matriz = actor.recall(MATRIZ);
         int posicionX = actor.recall(COORDENADA_X);

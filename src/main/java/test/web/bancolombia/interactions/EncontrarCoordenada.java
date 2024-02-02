@@ -2,6 +2,7 @@ package test.web.bancolombia.interactions;
 
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Interaction;
+import net.thucydides.core.annotations.Step;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 import static test.web.bancolombia.userinterfaces.MatrizPage.LBL_COORDENADAS;
@@ -13,6 +14,7 @@ public class EncontrarCoordenada implements Interaction {
 
 
     @Override
+    @Step("{0} obtiene coordenadas del boton")
     public <T extends Actor> void performAs(T actor) {
         int corrdenadaX = 0;
         int corrdenadaY = 0;
