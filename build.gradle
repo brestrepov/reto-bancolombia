@@ -1,0 +1,47 @@
+plugins {
+    id "net.serenity-bdd.serenity-gradle-plugin" version "3.5.0"
+    id 'java'
+    id 'eclipse'
+    id 'idea'
+}
+
+defaultTasks 'clean', 'test', 'aggregate'
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = JavaVersion.VERSION_11
+
+ext {
+    serenityVersion = '3.6.12'
+    serenityCucumberVersion = '3.6.12'
+    hamcrestVersion = '2.2'
+    junitVersion = '5.8.2'
+    assertJVersion = '3.22.0'
+}
+
+dependencies {
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+    testImplementation group: 'org.hamcrest', name: 'hamcrest-core', version: "${hamcrestVersion}"
+    implementation group: 'net.serenity-bdd', name: 'serenity-core', version: "${serenityVersion}"
+    implementation group: 'net.serenity-bdd', name: 'serenity-cucumber', version: "${serenityCucumberVersion}"
+    implementation group: 'net.serenity-bdd', name: 'serenity-screenplay', version: "${serenityVersion}"
+    implementation group: 'net.serenity-bdd', name: 'serenity-junit', version: "${serenityVersion}"
+    implementation group: 'net.serenity-bdd', name: 'serenity-screenplay-rest', version: "${serenityVersion}"
+    implementation group: 'net.serenity-bdd', name: 'serenity-ensure', version: "${serenityVersion}"
+
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+tasks.withType(Test) {
+    systemProperty "file.encoding", "UTF-8"
+    maxParallelForks = 1
+}
+
+gradle.startParameter.continueOnFailure = true
+
+test.finalizedBy(aggregate)
